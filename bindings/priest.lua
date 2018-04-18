@@ -1,144 +1,118 @@
-if(select(2, UnitClass'player') ~= 'PRIEST') then return end
+if select(2, UnitClass('player')) ~= 'PRIEST' then return end
 
-local _, bindings = ...
+oBindings:Factory(function(self)
+        local level = UnitLevel('player')
 
+        local priestBase = {
+            [1] = 's|Holy Fire',
+            [2] = 's|Smite',
+            [3] = 's|Mind Blast(Rank 1)',
+            -- [3] = 's|Mind Blast',
+            [4] = [[m|[@mouseover,harm,nodead] Shadow Word: Pain(Rank 1);
+              [@mouseover,help,nodead] Renew;
+                         [harm,nodead] Shadow Word: Pain(Rank 1);
+                                       Renew]],
+            [5] = [[m|[@mouseover,harm,nodead] Shadow Word: Pain;
+                                       Shadow Word: Pain]],
+            T = [[m|[@mouseover,harm,nodead] Hex of Weakness;
+                                     Hex of Weakness]],
+            F = 's|Psychic Scream',
+            ['§'] = 's|Shoot',
+            C = 's|Attack',
+            F1 = [[m|[@mouseover,help] Power Word: Fortitude;
+                               Power Word: Fortitude]],
+            F3 = [[m|[@mouseover,help] Shadow Protection;
+                               Shadow Protection]],
 
-local healBase = {
-	's|Prayer of Mending',
-	[3] = 's|Prayer of Healing',
-	[5] = 's|Smite',
-	[6] = 's|Renew',
-	[7] = 's|Hymn of Hope',
+            F10 = 's|Find Herbs',
+            F11 = 's|Mind Vision',
+            F12 = 'm|[@mouseover,help,dead] Resurrection; Resurrection',
 
-	shift = {
-		[3] = 's|Shadow Word: Pain',
-		[4] = 's|Holy Nova',
+            shift = {
+                [1] = [[m|[@mouseover,help,nodead] Power Word: Shield;
+                                           Power Word: Shield]],
+                [2] = [[m|[@mouseover,help,nodead] Abolish Disease;
+                                           Abolish Disease]],
+                [3] = [[m|[@mouseover,help,nodead] Cure Disease;
+                                           Cure Disease]],
+                [4] = [[m|[@mouseover,help,nodead] Dispel Magic;
+                         [@mouseover,harm] Dispel Magic;
+                                           Dispel Magic]],
+                R = 's|Inner Fire',
+                F = 's|Shadowguard',
+                C = 's|Mana Burn',
+                ['§'] = 's|Berserking',
+                F1 = [[m|[@mouseover,help] Prayer of Fortitude;
+                                   Prayer of Fortitude]],
+                F3 = [[m|[@mouseover,help] Prayer of Shadow Protection;
+                                   Prayer of Shadow Protection]],
+            },
 
-		F5 = 's|Power Word: Fortitude',
-		F6 = 's|Shadow Protection',
-	},
+            ctrl = {
+                [1] = 'm|[@mouseover,help,nodead] Flash Heal(Rank 3); Flash Heal(Rank 3)',
+                [2] = 'm|[@mouseover,help,nodead] Flash Heal; Flash Heal',
+                [3] = 'm|[@mouseover,help,nodead] Greater Heal(Rank 1); Greater Heal(Rank 1)',
+                [4] = 'm|[@mouseover,help,nodead] Greater Heal(Rank 3); Greater Heal(Rank 3)',
+                R = 's|Inner Focus',
+                F = 's|Prayer of Healing(Rank 3)',
+                V = 's|Psychic Scream(Rank 1)'
+            },
 
-	alt = {
-		's|Dispel Magic',
-		's|Cure Disease',
-	},
+            alt = {
+                [3] = 's|Fade',
+                [2] = 'm|[@mouseover,harm,nodead] Mind Soothe; Mind Soothe',
+                [4] = 'm|[@mouseover,harm,nodead] Shackle Undead; Shackle Undead',
+                R = 's|Levitate',
+                C = 's|Mind Control'
+            }
+        }
 
-	ctrl = {
-		[[m|/cast [nopet] Shadowfiend
-/petattack
-/cast Shadowcrawl]],
-'s|Mind Control',
+        if level < 44 then
+            priestBase.ctrl[1] = 'm|[@mouseover,help,nodead] Lesser Heal; Lesser Heal'
+        end
 
-		C = 's|Psychic Scream'
-	},
+        if level < 60 then
+            priestBase.ctrl[3] = 'm|[@mouseover,help,nodead] Heal; Heal'
+        end
 
-	W = 's|Power Word: Shield',
-	G = 's|Fade',
-	C = 'm|/use 14',
-	Q = 's|Mass Dispel',
-	X = 's|Shoot',
-	A = 's|Binding Heal',
+        local disc = {
+            V = 'm|[nochanneling:Mind Flay] Mind Flay',
+            R = 's|Holy Nova',
+            F2 = [[m|[@mouseover,help] Divine Spirit;
+                               Divine Spirit]],
 
-	['`'] = 's|Power Word: Barrier',
+            shift = {
+                C = 'm|[@mouseover,help] Power Infusion; Power Infusion',
+                V = 's|Holy Nova(Rank 1)',
+                F2 = [[m|[@mouseover,help] Prayer of Spirit;
+                                   Prayer of Spirit]],
+            }
+        }
 
-	F5 = 's|Power Word: Fortitude',
-	F6 = 's|Shadow Protection',
-	F7 = 's|Fear Ward',
-	F11 = 's|Resurrection',
-	F12 = [[m|/clearfocus [modifier:alt][@focus,dead][@focus,help][@focus,noexists]
-/focus [@focus,noexists]
-/cast [@focus]Shackle Undead]]
-}
+        local holy = {
+            V = 'm|[nochanneling:Mind Flay] Mind Flay(Rank 1),',
+            -- V = 'm|[nochanneling:Mind Flay] Mind Flay,',
+            R = 's|Holy Nova',
+            F2 = [[m|[@mouseover,help] Divine Spirit;
+                               Divine Spirit]],
 
-local disc = {
-	[2] = 's|Penance',
-	[4] = 's|Holy Fire',
+            shift = {
+                V = 's|Holy Nova(Rank 1)',
+                F2 = [[m|[@mouseover,help] Prayer of Spirit;
+                                   Prayer of Spirit]],
+            }
+        }
 
-	V = 's|Inner Will',
-	H = 's|Power Infusion',
+        local shadow = {
+            [1] = 'm|[nochanneling:Mind Flay] Mind Flay',
+            R = 'm|[@mouseover,harm] Vampiric Embrace; Vampiric Embrace',
+            C = 'm|[@mouseover,harm] Silence; Silence',
 
-	shift = {
-		[3] = 's|Archangel',
-	},
+            F2 = 's|Shadowform',
+        }
 
-	ctrl = {
-		[3] = 's|Pain Suppression',
-	},
-}
+        self:RegisterKeyBindings('Discipline', gxBindings.base, priestBase, disc)
+        self:RegisterKeyBindings('Holy', gxBindings.base, priestBase, holy)
+        self:RegisterKeyBindings('Shadow', gxBindings.base, priestBase, shadow)
 
-local holy = {
-	[2] = 's|Circle of Healing',
-	[4] = 's|Divine Hymn',
-
-	V = 's|Inner Will',
-	['`'] = 's|Leap of Faith',
-
-	BUTTON4 = 's|Lightwell',
-
-	shift = {
-		V = 's|Chakra',
-	},
-
-	ctrl = {
-		[3] = 's|Guardian Spirit',
-		[4] = 'm|/click ActionButton1',
-	},
-}
-
-local shadow = {
-	"s|Shadow Word: Death",
-	"s|Shadow Word: Pain",
-	"s|Vampiric Touch",
-	"m|/cast [nochanneling:Mind Flay] Mind Flay",
-	"m|/cast [nochanneling:Mind Flay] Mind Blast",
-	"s|Dispersion",
-
-	V = 's|Inner Fire',
-	A = 's|Mind Spike',
-
-	BUTTON4 = 's|Mind Sear',
-	BUTTON5 = 's|Shadowform',
-
-	shift = {
-		"s|Devouring Plague",
-		"s|Shadow Word: Pain (Rank 1)",
-		's|Archangel',
-		"s|Flash Heal",
-		"s|Greater Heal",
-		V = "s|Vampiric Embrace",
-	},
-
-	alt = {
-		[1] = "s|Dispel Magic",
-		[2] = "s|Cure Disease",
-	},
-
-	ctrl = {
-		[[m|/cast [nopet] Shadowfiend
-/petattack
-/cast Shadowcrawl]],
-
-		[2] = "s|Mind Control",
-		C = 's|Psychic Scream',
-	},
-
-	W = "s|Power Word: Shield",
-	G = "s|Fade",
-	C = "m|/use 14",
-	D = "s|Mana Burn",
-	Q = "s|Mass Dispel",
-	V = "s|Inner Fire",
-	X = "s|Shoot",
-
-	F5 = "s|Power Word: Fortitude",
-	F6 = "s|Shadow Protection",
-	F7 = "s|Fear Ward",
-	F11 = "s|Resurrection",
-	F12 = [[m|/clearfocus [modifier:alt][@focus,dead][@focus,help][@focus,noexists]
-/focus [@focus,noexists]
-/cast [@focus]Shackle Undead]],
-}
-
-oBindings:RegisterKeyBindings('Discipline', bindings.base, healBase, disc)
-oBindings:RegisterKeyBindings('Holy', bindings.base, healBase, holy)
-oBindings:RegisterKeyBindings('Shadow', bindings.base, shadow)
+end)

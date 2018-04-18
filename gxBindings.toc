@@ -1,0 +1,21 @@
+## Interface: 11200
+## Title: |cffffaa00gx|r|cff999999Bindings|r
+## Author: martinjlowm
+## Version: 1.0
+## X-eMail: martin@martinjlowm.dk
+## Notes: Personal bindings for oBindings
+
+## Dependencies: oBindings
+
+libs\Sol\libs\LibStub\LibStub.lua
+libs\Sol\Sol.lua
+
+bindings\base.lua
+bindings\priest.lua
+bindings\mage.lua
+bindings\hunter.lua
+bindings\rogue.lua
+bindings\shaman.lua
+bindings\druid.lua
+bindings\warlock.lua
+bindings\warrior.lua

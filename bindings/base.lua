@@ -1,20 +1,36 @@
-local _, bindings = ...
+gxBindings = gxBindings or {}
 
-bindings.base = {
-	F = "MOVEFORWARD",
-	R = "STRAFELEFT",
-	S = "MOVEBACKWARD",
-	T = "STRAFERIGHT",
+gxBindings.base = {
+    W = 'MOVEFORWARD',
+    Q = 'STRAFELEFT',
+    S = 'MOVEBACKWARD',
+    E = 'STRAFERIGHT',
+    A = 'TURNLEFT',
+    D = 'TURNRIGHT',
 
-	B = "OPENALLBAGS",
+    B = 'OPENALLBAGS',
 
-	[';'] = "TOGGLESPELLBOOK",
+    ['TAB'] = 'TARGETNEARESTENEMY',
 
-	ctrl = {
-		V = 'm|/mount'
-	},
+    N = 'TOGGLETALENTS',
+    I = 'TOGGLECHARACTER0',
+    [';'] = 'TOGGLESPELLBOOK',
+    ['\\'] = 'TOGGLERUN',
+    [']'] = 'TOGGLEAUTORUN',
 
-	F8 = "m|/run ReloadUI()",
-	F9 = "TOGGLECHARACTER0",
-	F10 = "TOGGLETALENTS",
+    shift = {
+        B = 'f|MOUNT',
+    },
+    ctrl = {
+        ['§'] = 'i|13',
+        ['TAB'] = 'TARGETNEARESTFRIEND',
+    },
+
+    F8 = 'm|/run ReloadUI()',
+    F9 = 'i|Crescent Key',
+
+    ['RIGHT'] = 'a|[@mouseover] 8; 8',
+    ['LEFT'] = 'a|[@mouseover] 7; 7',
+    ['UP'] = 'a|[@mouseover] 6; 6',
+    ['DOWN'] = 'a|[@mouseover] 5; 5',
 }
