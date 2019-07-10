@@ -1,0 +1,17 @@
+#+TITLE: gxBindings
+
+My personal Classic bindings
+
+
+* Development
+
+Dependencies:
+
+- typescript-to-lua (https://github.com/TypeScriptToLua/TypeScriptToLua)
+- typescript
+- pnpm
+
+#+BEGIN_SRC sh-mode
+pnpm i
+pnpm run build
+#+END_SRC

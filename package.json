@@ -1,11 +1,13 @@
 {
   "name": "gxBindings",
-  "description": "My personal bindings",
-  "dependencies": {
-    "typepark": "^0.8.0",
-    "typescript": "^3.5.2"
-  },
+  "description": "My personal Classic WoW bindings",
   "scripts": {
     "build": "tstl -p tsconfig.json"
+  },
+  "devDependencies": {
+    "tstl": "^2.2.0",
+    "typepark": "^0.8.0",
+    "typescript": "^3.5.2",
+    "typescript-to-lua": "^0.23.0"
   }
 }
