@@ -1,0 +1,19 @@
+dependencies:
+  typepark: 0.8.0
+  typescript: 3.5.2
+lockfileVersion: 5
+packages:
+  /typepark/0.8.0:
+    dev: false
+    resolution:
+      integrity: sha512-slArdT+uOz/io5B6Z4PbrRel81PmRx5m3WzD3nTEg00rO1vrQrj4CLo5PGeT4RjmlGPc0kS+tcKe6WeItveV5w==
+  /typescript/3.5.2:
+    dev: false
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-7KxJovlYhTX5RaRbUdkAXN1KUZ8PwWlTzQdHV6xNqvuFOs7+WBo10TQUqT19Q/Jz2hk5v9TQDIhyLhhJY4p5AA==
+specifiers:
+  typepark: ^0.8.0
+  typescript: ^3.5.2
