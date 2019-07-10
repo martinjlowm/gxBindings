@@ -7,15 +7,12 @@
 
 ## Dependencies: oBindings
 
-libs\Sol\libs\LibStub\LibStub.lua
-libs\Sol\Sol.lua
-
-bindings\base.lua
-bindings\priest.lua
-bindings\mage.lua
-bindings\hunter.lua
-bindings\rogue.lua
-bindings\shaman.lua
-bindings\druid.lua
-bindings\warlock.lua
-bindings\warrior.lua
+dist\bindings\base.lua
+dist\bindings\priest.lua
+dist\bindings\mage.lua
+dist\bindings\hunter.lua
+dist\bindings\rogue.lua
+dist\bindings\shaman.lua
+dist\bindings\druid.lua
+dist\bindings\warlock.lua
+dist\bindings\warrior.lua

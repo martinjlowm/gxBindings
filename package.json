@@ -1,0 +1,8 @@
+{
+  "name": "gxBindings",
+  "description": "My personal bindings",
+  "dependencies": {
+    "typepark": "^0.8.0",
+    "typescript": "^3.5.2"
+  }
+}
